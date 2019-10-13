@@ -1,17 +1,18 @@
 // We're going to store the temperature
-let temperature = 0;
+var temperature = 0;
+var city = "";
 // We're going to store text about the weather
-let weather = "";
+var weather = "";
 
-let weatherId;
+var weatherId;
 
-let icon = "";
-let sunrise;
-let sunset;
+var icon = "";
+var  sunrise;
+var sunset;
 let img;
 
-var locationData;
-let json;
+var location;
+var json;
 
 
 
@@ -20,33 +21,41 @@ function preload() {
   //get by city ID
   //Manhattan: 4274994
   //let url = "https://api.openweathermap.org/data/2.5/weather?id=4274994&units=metric&APPID=69b4441f84773f60a7ac0fc6567723c1";
-
-
+  
   //get by current coordinates
-  locationData = getCurrentPosition();
+  location = getCurrentPosition(getJson); 
+}
 
-  let url = "https://api.openweathermap.org/data/2.5/weather?lat=" + locationData.latitude 
-  +"&lon=" + locationData.longitude + "&units=metric&APPID=69b4441f84773f60a7ac0fc6567723c1";
+function getJson(position) {
+
+  //let url = "https://api.openweathermap.org/data/2.5/weather?lat=" + position.latitude 
+  //+"&lon=" + position.longitude + "&units=metric&APPID=69b4441f84773f60a7ac0fc6567723c1";
+
+  let url = "https://api.openweathermap.org/data/2.5/weather?id=4274994&units=metric&APPID=69b4441f84773f60a7ac0fc6567723c1";
   json = loadJSON(url);
+  
 }
 
 function setup() {
   createCanvas(800, 400);
-  //print(locationData.latitude + ", " + locationData.longitude);
-  let city = json.name;
+
+  console.table(json);
+  //city = json.name;
+  //print(json.name);
+
   // Get the temperature
-  let temperature = json.main.temp;
+  //temperature = json.main.temp;
 
   // Grab the description, look how we can "chain" calls.
-  weather = json.weather[0].description;
-  weatherId = json.weather[0].id;
-  icon = json.weather[0].icon;
+  //weather = json.weather[0].description;
+  //weatherId = json.weather[0].id;
+  //icon = json.weather[0].icon;
 
   //sunrise =
   //sunset =
 
-  img = loadImage("https://openweathermap.org/img/wn/" + icon + "@2x.png");
-  img.resize (100, 100);
+  //img = loadImage("https://openweathermap.org/img/wn/" + icon + "@2x.png");
+  //img.resize (100, 100);
 }
 
 function draw() {
@@ -81,6 +90,6 @@ function draw() {
     
   }
 
-  image(img, width / 2, 20, img.width , img.height)
+  //image(img, width / 2, 20, img.width , img.height)
 
 }
