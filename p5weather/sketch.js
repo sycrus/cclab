@@ -38,16 +38,6 @@ function setup() {
   weatherId = json.weather[0].id;
   icon = json.weather[0].icon;
 
-  let sunrise = new Date(json.sys.sunrise); 
-  let sunset = new Date(json.sys.sunset); 
-  print("sunrise: " + sunrise);
-  print("sunset: " + sunset);
-
-  sunriseTime = moment.tz(sunrise).format('LTS');
-  sunsetTime = moment.tz(sunset).format('LTS');
-  print("sunrise: " + sunriseTime);
-  print("sunset: " + sunsetTime);
-
   img = loadImage("https://openweathermap.org/img/wn/" + icon + "@2x.png");
   img.resize (100, 100);
 }
@@ -61,7 +51,7 @@ function draw() {
   textSize(32);
   text("City: " + city, 10, 50);
   text("Current temperature: " + round(temperature) + "ºC", 10, 80);
-  text("Forecast: " + weather , 10, 110);
+  text("Forecast: " + weather.charAt(0).toUpperCase() + weather.slice(1) , 10, 110);
 
   //text("Weather ID: " + weatherId, 10, 110);
   //text("Digit: " + ((weatherId /100) % 10), 10, 130);
