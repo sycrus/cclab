@@ -25,7 +25,7 @@ function preload() {
   //get by current coordinates
   locationData = getCurrentPosition();
 
-  let url = "http://api.openweathermap.org/data/2.5/weather?lat=" + locationData.latitude 
+  let url = "https://api.openweathermap.org/data/2.5/weather?lat=" + locationData.latitude 
   +"&lon=" + locationData.longitude + "&units=metric&APPID=69b4441f84773f60a7ac0fc6567723c1";
   json = loadJSON(url);
 }
@@ -45,7 +45,7 @@ function setup() {
   //sunrise =
   //sunset =
 
-  img = loadImage("http://openweathermap.org/img/wn/" + icon + "@2x.png");
+  img = loadImage("https://openweathermap.org/img/wn/" + icon + "@2x.png");
   img.resize (100, 100);
 }
 
