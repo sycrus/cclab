@@ -1,19 +1,18 @@
-// We're going to store the temperature
+
 var temperature = 0;
+var temp_min;
+var temp_max;
 var city = "";
-// We're going to store text about the weather
 var weather = "";
-
 var weatherId;
-
 var icon = "";
-
 let img;
-
 var location;
 var json;
-
-
+var nightBackgroundColor;
+var dayBackgroundColor;
+var nightTextColor;
+var dayTextColor;
 
 function preload() {
 
@@ -25,59 +24,67 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(800, 400);
-
+  nightBackgroundColor = color(108,123,149);
+  dayBackgroundColor = color(178,252,255);
+  nightTextColor = color(235,255,251);
+  dayTextColor = color(132,59,98);
+  createCanvas(400, 300);
+  background(dayBackgroundColor); //default: night
+  fill(dayTextColor);
+  
   city = json.name;
 
   // Get the temperature
   temperature = json.main.temp;
-  min = json.main.temp_min;
-  max = json.main.temp_max;
+  temp_min = json.main.temp_min;
+  temp_max = json.main.temp_max;
   
   // Grab the description, look how we can "chain" calls.
   weather = json.weather[0].description;
   icon = json.weather[0].icon;
 
   img = loadImage("https://openweathermap.org/img/wn/" + icon + "@2x.png");
+
+  //testing
+  //day
+  //img = loadImage("https://openweathermap.org/img/wn/01d@2x.png");
+  //night
+  //img = loadImage("https://openweathermap.org/img/wn/01n@2x.png");
   img.resize (100, 100);
 }
 
 function draw() {
-  background(255);
-  fill(0);
 
+  updateColors();
   // Display all the stuff we want to display
   textFont("Kanit");
-  textSize(32);
+  
 
   textAlign(CENTER);
-  text(city, width/2, 50);
+  textSize(32);
+  text(city, width/2, 70);
 
-  text(round(temperature) + "ºC", 10, 80);
-  text(round(min) + "ºC - " + round(max) + "ºC", 10, 110);
-  text(weather.charAt(0).toUpperCase() + weather.slice(1) , 10, 140);
-
-  //text("Weather ID: " + weatherId, 10, 110);
-  //text("Digit: " + ((weatherId /100) % 10), 10, 130);
+  imageMode(CORNER);
+  textAlign(LEFT);
+  image(img, 0, 60, 2 * img.width , 2 * img.height);
+  textSize(28);
+  text(weather.charAt(0).toUpperCase() + weather.slice(1) , 35, 250);
   
-  //background colors based on category of weather
-  // if (weatherId == 800) { //clear: d-blue, n-dark
+  textAlign(CENTER);
+  textSize(70);
+  text(round(temperature) + "ºC", 290, 180);
+  textSize(28);
+  text(round(temp_min) + "ºC - " + round(temp_max) + "ºC", 290, 250);
 
-  // }
-  // else if (((weatherId /100) % 10) == 2) { //thunderstorm
-
-  // } else if (((weatherId /100) % 10) == 3) { //drizzle
-
-  // } else if (((weatherId /100) % 10) == 5) { //rain
-
-  // } else if (((weatherId /100) % 10) == 6) { //snow
-
-  // } else if (((weatherId /100) % 10) == 7) { //atmosphere
-
-  // } else if (((weatherId /100) % 10) == 8) { //clouds
-    
-  // }
-
-  image(img, width / 2, 20, img.width , img.height)
-
+}
+function updateColors() {
+  if (Array.from(icon)[2] == 'd') {
+    //print("day");
+    fill(dayTextColor);
+    background(dayBackgroundColor);
+  } else {
+    //print("night");
+    fill(nightTextColor);
+    background(nightBackgroundColor);
+  }
 }
