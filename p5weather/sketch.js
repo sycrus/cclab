@@ -20,36 +20,35 @@ function preload() {
 
   //get by city ID
   //Manhattan: 4274994
-  //let url = "https://api.openweathermap.org/data/2.5/weather?id=4274994&units=metric&APPID=69b4441f84773f60a7ac0fc6567723c1";
-  
+  let url = "https://api.openweathermap.org/data/2.5/weather?id=4274994&units=metric&APPID=69b4441f84773f60a7ac0fc6567723c1";
+  json = loadJSON(url);
+
+
   //get by current coordinates
-  location = getCurrentPosition(getJson); 
+  //location = getCurrentPosition(getJson); 
 }
 
 function getJson(position) {
 
   //let url = "https://api.openweathermap.org/data/2.5/weather?lat=" + position.latitude 
   //+"&lon=" + position.longitude + "&units=metric&APPID=69b4441f84773f60a7ac0fc6567723c1";
-
-  let url = "https://api.openweathermap.org/data/2.5/weather?id=4274994&units=metric&APPID=69b4441f84773f60a7ac0fc6567723c1";
-  json = loadJSON(url);
   
 }
 
 function setup() {
   createCanvas(800, 400);
 
-  console.table(json);
-  //city = json.name;
+  //console.table(json);
+  city = json.name;
   //print(json.name);
 
   // Get the temperature
-  //temperature = json.main.temp;
+  temperature = json.main.temp;
 
   // Grab the description, look how we can "chain" calls.
-  //weather = json.weather[0].description;
-  //weatherId = json.weather[0].id;
-  //icon = json.weather[0].icon;
+  weather = json.weather[0].description;
+  weatherId = json.weather[0].id;
+  icon = json.weather[0].icon;
 
   //sunrise =
   //sunset =
@@ -90,6 +89,6 @@ function draw() {
     
   }
 
-  //image(img, width / 2, 20, img.width , img.height)
+  image(img, width / 2, 20, img.width , img.height)
 
 }
