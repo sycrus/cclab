@@ -7,8 +7,8 @@ var weather = "";
 var weatherId;
 
 var icon = "";
-var  sunrise;
-var sunset;
+var sunriseTime;
+var sunsetTime;
 let img;
 
 var location;
@@ -38,8 +38,15 @@ function setup() {
   weatherId = json.weather[0].id;
   icon = json.weather[0].icon;
 
-  //sunrise =
-  //sunset =
+  let sunrise = new Date(json.sys.sunrise); 
+  let sunset = new Date(json.sys.sunset); 
+  print("sunrise: " + sunrise);
+  print("sunset: " + sunset);
+
+  sunriseTime = moment.tz(sunrise).format('LTS');
+  sunsetTime = moment.tz(sunset).format('LTS');
+  print("sunrise: " + sunriseTime);
+  print("sunset: " + sunsetTime);
 
   img = loadImage("https://openweathermap.org/img/wn/" + icon + "@2x.png");
   img.resize (100, 100);
