@@ -49,7 +49,7 @@ function getPokemon() {
     text(speechStr, width/2, height/2);
 
     //loads pokemon sprite NOT CORRECT
-    //img = loadImage(json.sprites.front_default);
+    img = loadImage(json.sprites.front_default);
 
     //display pokemon image
     image(img, 0, 60, 2 * img.width , 2 * img.height);
