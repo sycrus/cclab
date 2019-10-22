@@ -64,7 +64,8 @@ function getPokeInfo(data) {
 }
 
 function draw() {
-  var dex = loadImage("pokedex.png");
+
+  var dex = loadImage("https://github.com/sycrus/cclab/blob/master/pokemon/pokedex.png");
   image(dex, 0, 0, img.width , img.height);
   //set up pokedex in background
 }
