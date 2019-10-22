@@ -1,74 +1,72 @@
+// psuedocode
+// load speech recog
+// setup scene, button
+// if button is pressed, 
+//    start speech recog
+//    use speech string to build url
+//    loadJSON(url) --> CALLBACK before doing anything else
+//    do stuff with json
+
 
 var speechButton;
 var img;
+var url;
 var speechStr;
+
 var pokemonStr;
-var json; //pokemon api
+
 var myRec ;
-
-function preload() {
-
-  let url = "https://pokeapi.co/api/v2/pokemon/";
-  json = loadJSON(url);
-
-}
 
 function setup() {
   
-  createCanvas(400, 300);
-  background(255); 
+  createCanvas(400, 400);
+  background(200); 
+  textFont("Kanit");
 
   //create p5.speech object
   myRec = new p5.SpeechRec();
-  myRec.onResult = getPokemon;
 
-  //create button
-  // speechButton = createButton('Pokemon!');
-  // button.position(65, 65);
-  // button.mousePressed(getPokemon);
-
-  
+  speechButton = createButton('Summon Pokemon!');
+  speechButton.position(width/2, 10);
+  speechButton.mousePressed(getPokemon);
 
 }
 
-//called when button is pressed
+//called when onResult is called
 function getPokemon() {
-  //starts p5.speech
-  myRec.start();
 
+  myRec.start();
   //checks to see if any speech input was registered
-  if(myRec.resultValue==true) {
-    
-    //console displays spoken text
-    print(myRec.resultString);
+  if(myRec.resultValue) {
 
     //removes whitespaces, store word in string
     speechStr = myRec.resultString.replace(/\s/g, '');
-
-    //display pokemon name
-    text(speechStr, width/2, height/2);
-
-    //loads pokemon sprite NOT CORRECT
-    img = loadImage(json.sprites.front_default);
-
-    //display pokemon image
-    image(img, 0, 60, 2 * img.width , 2 * img.height);
-
-    //done with speech
-    myRec.stop();
+    pokemonStr = speechStr.toLowerCase();
     
+    text(speechStr, width/2, height/2);
+    
+    let url = "https://pokeapi.co/api/v2/pokemon/";
+
+    loadJSON(url + pokemonStr, getPokeInfo);
+
   }
-  
-
-
 }
+
+
+//do all the displays here
+function getPokeInfo(data) {
+
+  var pokeId = data.id;
+  img = createImg(data.sprites.front_default, data.name);
+  image(img, 0, 60, img.width , img.height);
+  //display pokemon name
+  //print(pokeJson.id);
+}
+
 function draw() {
-
-  textFont("Kanit");
-  
-
+  var dex = loadImage("pokedex.png");
+  image(dex, 0, 0, img.width , img.height);
   //set up pokedex in background
-
 }
 
 
