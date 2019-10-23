@@ -1,26 +1,20 @@
-var speechButton;
-var speechStr;
+var myRec ;
+var bgImg;
 var myFont;
 
-var gotData, gotData2;
-var bgImg;
+var speechStr;
+var pokemonStr;
 
-var isRecording = false;
+var gotData, gotData2;
 
 var pokeId;
 var pokeName;
 var pokeType;
-
 var pokeImg;
 var pokeWeightLbs;
 var pokeHeight;
 var pokeHeightFeet, pokeHeightInches;
 var pokeText;
-
-var pokemonStr;
-
-var myRec ;
-
 
 function preload() {
   bgImg = loadImage("pokedex.png");
@@ -48,10 +42,6 @@ function getPokemon() {
     speechStr = myRec.resultString.replace(/\s/g, '');
     pokemonStr = speechStr.toLowerCase();
 
-    //for testing
-    //speechStr = "Hypno";
-    //pokemonStr = "hypno";
-   
     let url = "https://pokeapi.co/api/v2/pokemon/";
 
     loadJSON(url + pokemonStr, getPokeInfo);
