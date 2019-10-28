@@ -2,6 +2,7 @@ let table;
 let states = [ 'AK', 'AL', 'AR', 'AS', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'FM', 'GA', 'GU', 'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MH', 'MI', 'MN', 'MO', 'MS', 'MT', 'NC',  'ND', 'NE', 'NJ', 'NH', 'NM',' NV', 'NY', 'MP', 'OH', 'OK', 'OR', 'PA', 'PR', 'PW', 'RI', 'SD', 'SC', 'TN', 'TX', 'UT', 'VI', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY'];
 let deathsPerState = []; //array of tablerow objects
 let dps =[]; //array of ints
+var source;
 var xScaleValue = 20;
 var yScaleValue = 1.2;
 
@@ -22,6 +23,7 @@ function draw(){
 
   textSize(40);
   text("Justifiable Homicides, 2016", width/2 - 250, 50);
+
   // ********* plots deaths per state ************
   for (var j= 0; j < states.length; j++) {
     deathsPerState[j]= table.matchRows(states[j], 'state');
@@ -44,4 +46,7 @@ function draw(){
     text(k, 10, 250-k * yScaleValue);
   }
   //************ plots 
+  textSize(8);
+  source = "Source: https://www.theguardian.com/us-news/ng-interactive/2015/jun/01/about-the-counted";
+  text(source, width/2 - 140, height - 10);
 }
